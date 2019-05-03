@@ -1,0 +1,17 @@
+.chat-content {
+    min-height: 220px;
+    max-height: 220px;
+    overflow: hidden;
+    overflow-y: hidden;
+    overflow-y: auto;
+    background-color: #f6f6f6;
+}
+
+.chat-user {
+    min-height: 220px;
+    background-color: #cceff2;
+    position: absolute;
+    top: 7px;
+    right: 0;
+    width: 300px;
+}

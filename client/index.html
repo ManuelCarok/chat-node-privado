@@ -1,0 +1,28 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="chat-content" id="chat"></div>
+    <div class="chat-user" id="usuarios"></div>
+
+    <input type="text" placeholder="Escribe un mensaje" id="mesanje">
+    <button id="btnEnviar">Enviar</button>
+    <span id="status"></span>
+
+
+    <input type="text" id="usuario">
+    <button id="btnConectar">Conectar</button>
+
+    <script src="./assets/jquery/jquery-3.4.1.min.js"></script>
+    <script src="./assets/socketio/socket.io.js"></script>
+    <script src="./js/init.js"></script>
+</body>
+
+</html>
