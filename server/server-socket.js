@@ -13,7 +13,11 @@ var clients = new Array();
 io.on('connection', function(client) {
     client.on('mensaje', function(data) {
         if (data.for == 'na') {
-            io.emit('message', { mensaje: data.mensaje });
+            for (var i = 0; i < clients.length; i++) {
+                if (clients[i]['id'] === client.id) {
+                    io.emit('message', { mensaje: data.mensaje, usuario: clients[i].name });
+                }
+            }
         } else {
 
         }
@@ -28,16 +32,19 @@ io.on('connection', function(client) {
         fix(client);
         clients.push({ name: data.nombre, id: client.id });
         client.join(client.id);
+
+        client.emit('onLogin');
+
         // Emite a todos menos a ti
-        client.broadcast.emit('message', { mensaje: 'El usuario ' + data.nombre + ' se ha conectado' });
+        client.broadcast.emit('message', { mensaje: 'El usuario ' + data.nombre + ' se ha conectado', usuario: 'Servidor' });
 
         // Se emite a todos
         io.emit('ReqUsers', { clients: clients });
     });
 
     function fix(client) {
-        for (var i = 0; i < clients; i++) {
-            if (clients[i].id === client.id) {
+        for (var i = 0; i < clients.length; i++) {
+            if (clients[i]['id'] === client.id) {
                 var index = clients.indexOf([i]);
                 clients.splice([i], 1);
             }

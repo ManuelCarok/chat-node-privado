@@ -12,14 +12,18 @@
     <div class="chat-content" id="chat"></div>
     <div class="chat-user" id="usuarios"></div>
 
-    <input type="text" placeholder="Escribe un mensaje" id="mesanje">
-    <button id="btnEnviar">Enviar</button>
+    <div id="zonamensaje">
+        <input type="text" placeholder="Escribe un mensaje" id="mesanje">
+        <button id="btnEnviar">Enviar</button>
+    </div>
+
+    <div id="zonalogin">
+        <input type="text" id="usuario">
+        <button id="btnConectar">Conectar</button>
+    </div>
+
     <span id="status"></span>
-
-
-    <input type="text" id="usuario">
-    <button id="btnConectar">Conectar</button>
-
+    
     <script src="./assets/jquery/jquery-3.4.1.min.js"></script>
     <script src="./assets/socketio/socket.io.js"></script>
     <script src="./js/init.js"></script>
