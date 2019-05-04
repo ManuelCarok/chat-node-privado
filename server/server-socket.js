@@ -19,11 +19,28 @@ io.on('connection', function(client) {
                 }
             }
         } else {
+            for (var i = 0; i < clients.length; i++) {
+                if (clients[i]['name'] === data.for) {
 
+                    for (var j = 0; j < clients.length; j++) {
+                        if (clients[j]['id'] === client.id) {
+                            client.broadcast.to(clients[i]['id']).emit('message', { mensaje: data.mensaje + ' [PRIVADO]', usuario: clients[j].name });
+                        }
+                    }
+
+                }
+            }
         }
     });
 
     client.on('disconnect', function(data) {
+
+        for (var i = 0; i < clients.length; i++) {
+            if (clients[i]['id'] === client.id) {
+                io.emit('message', { mensaje: 'El usuario ' + clients[i]['name'] + ' se ha desconectado', usuario: 'Servidor' });
+            }
+        }
+
         fix(client);
         io.emit('ReqUsers', { clients: clients });
     });

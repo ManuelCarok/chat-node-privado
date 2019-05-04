@@ -1,6 +1,8 @@
 var servidor = 'localhost:1003';
 var socket = io.connect(servidor);
 
+var forU = 'na';
+
 $('#zonamensaje').hide();
 
 socket.on('connect', function() {
@@ -25,7 +27,7 @@ socket.on('ReqUsers', function(data) {
 
     $('#usuarios').html('');
     for (var i = 0; i < clients.length; i++) {
-        $('#usuarios').append(clients[i].name + '<br>');
+        $('#usuarios').append('<div onclick="sel(\''+ clients[i].name +'\')">' + clients[i].name + '</div>');
     }
 });
 
@@ -33,9 +35,13 @@ socket.on('message', function(data) {
     $('#chat').append(data.usuario + ' dice: ' + data.mensaje + '<br>');
 });
 
+function sel(name) {
+    forU = name;
+}
+
 $('#btnEnviar').click(function() {
     var mensaje = $('#mesanje').val();
-    socket.emit('mensaje', { mensaje: mensaje, for: 'na' });
+    socket.emit('mensaje', { mensaje: mensaje, for: forU });
 });
 
 $('#btnConectar').click(function() {
