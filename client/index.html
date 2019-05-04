@@ -15,6 +15,14 @@
     <div id="zonamensaje">
         <input type="text" placeholder="Escribe un mensaje" id="mesanje">
         <button id="btnEnviar">Enviar</button>
+        <br>
+        <select id="estado">
+            <option value="1">Conectado</option>
+            <option value="2">Ocupado</option>
+            <option value="3">Programando</option>
+        </select>
+        <input type="text" placeholder="mensaje personal" id="mensajepersonal">
+        <button id="btnGuardar">Guardar</button>
     </div>
 
     <div id="zonalogin">
@@ -23,7 +31,7 @@
     </div>
 
     <span id="status"></span>
-    
+
     <script src="./assets/jquery/jquery-3.4.1.min.js"></script>
     <script src="./assets/socketio/socket.io.js"></script>
     <script src="./js/init.js"></script>

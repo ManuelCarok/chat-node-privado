@@ -27,7 +27,7 @@ socket.on('ReqUsers', function(data) {
 
     $('#usuarios').html('');
     for (var i = 0; i < clients.length; i++) {
-        $('#usuarios').append('<div onclick="sel(\''+ clients[i].name +'\')">' + clients[i].name + '</div>');
+        $('#usuarios').append('<div onclick="sel(\''+ clients[i].name +'\')">' + clients[i].name + '(' + clients[i].estado + ') - <span>' + clients[i].personal + '</span></div>');
     }
 });
 
@@ -47,4 +47,14 @@ $('#btnEnviar').click(function() {
 $('#btnConectar').click(function() {
     var usuario = $('#usuario').val();
     socket.emit('login', { nombre: usuario });
+});
+
+$('#estado').change(function() {
+    var estado = $(this).val();
+    socket.emit('personal', { status: estado });
+});
+
+$('#btnGuardar').click(function() {
+    var msj = $('#mensajepersonal').val();
+    socket.emit('personal', { mensaje: msj });
 });

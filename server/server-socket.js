@@ -47,7 +47,7 @@ io.on('connection', function(client) {
 
     client.on('login', function(data) {
         fix(client);
-        clients.push({ name: data.nombre, id: client.id });
+        clients.push({ name: data.nombre, id: client.id, estado: 'Conectado', personal: '' });
         client.join(client.id);
 
         client.emit('onLogin');
@@ -58,6 +58,32 @@ io.on('connection', function(client) {
         // Se emite a todos
         io.emit('ReqUsers', { clients: clients });
     });
+
+    client.on('change_status', function(data) {
+        for (var i = 0; i < clients.length; i++) {
+            if (clients[i]['id'] === client.id) {
+                clients[i]['estado'] = getEstado(data.status);
+            }
+        }
+
+        io.emit('ReqUsers', { clients: clients });
+    });
+
+    client.on('personal', function(data) {
+        for (var i = 0; i < clients.length; i++) {
+            if (clients[i]['id'] === client.id) {
+                clients[i]['personal'] = data.mensaje;
+            }
+        }
+
+        io.emit('ReqUsers', { clients: clients });
+    });
+
+    function getEstado(estado) {
+        if(estado == 1) { return 'Conectado' }
+        if(estado == 2) { return 'Ocupado' }
+        if(estado == 3) { return 'Programando' }
+    }
 
     function fix(client) {
         for (var i = 0; i < clients.length; i++) {
